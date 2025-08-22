@@ -13,7 +13,7 @@ async def web_task():
 
 # DB listener example
 def db_callback(text):
-    tp.speech_to_speech_text(text, "db_output.wav")
+    tp.speech_to_speech(text, "db_output.wav")
     print("✅ DB processed!")
 
 threading.Thread(target=db_listener.db_poll_loop, args=("mydb.sqlite", db_callback), daemon=True).start()
