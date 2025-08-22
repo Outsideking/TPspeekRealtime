@@ -28,5 +28,4 @@ jobs:
     - name: Run TPspeek Real-Time
       run: |
         source tpspeek_env/bin/activate
-        # รัน Web listener, DB listener, และ UI listener พร้อมกันด้วย & และ nohup
         nohup python -u example_run.py > tpspeek_log.txt 2>&1 &
