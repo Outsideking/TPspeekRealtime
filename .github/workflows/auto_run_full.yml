@@ -1,0 +1,32 @@
+name: TPspeek Full Auto Setup & Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m venv tpspeek_env
+        source tpspeek_env/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run TPspeek Real-Time
+      run: |
+        source tpspeek_env/bin/activate
+        # รัน Web listener, DB listener, และ UI listener พร้อมกันด้วย & และ nohup
+        nohup python -u example_run.py > tpspeek_log.txt 2>&1 &
